@@ -47,7 +47,6 @@ int main() {
     cin >> n1;
     cin >> n2;
     cin >> operador;
-
     
     if (n1 == 0 || n2 == 0) {
       cout << "digite um número válido ou diferente de 0";
