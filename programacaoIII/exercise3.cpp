@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cctype>
 #include <stdexcept>
+#include <iomanip>
 using namespace std;
 
 class user {
@@ -10,17 +11,30 @@ private:
 
 public:
   void verSaldo();
-  void depositarValor(int deposito);
-  void sacarValor(int saque);
+  void depositarValor(double deposito);
+  void sacarValor(double saque);
 
 };
 
-void refazer(user &usuario) {
+void user::verSaldo() {
+  cout << "Seu saldo disponível: " << fixed << setprecision(2) << saldo << endl;
+};
+
+void user::sacarValor(double saque) {
+  double saqueTemporario = saldo - saque;
   char chose;
-  cin >> chose;
-  switch (chose) {
+
+  if (saqueTemporario < 0) {
+    cout << "você não pode sacar esse valor, pois é maior do que você tem na conta!" << endl;
+
+  } else {
+    saldo -= saque;
+    cout << "Parabéns! Você sacou R$" << fixed << setprecision(2) << saque << ". Deseja ver seu saldo? (s, n): ";
+    cin >> chose;
+
+    switch (chose) {
     case 's':
-      usuario.verSaldo();
+      verSaldo();
       break;
 
     case 'n':
@@ -29,33 +43,17 @@ void refazer(user &usuario) {
     
     default:
       cout << "insira uma operação válida!";
+
       break;
-
   }
-}
-
-void user::verSaldo() {
-  cout << "Seu saldo disponível: " << saldo << endl;
-};
-
-void user::sacarValor(int saque) {
-  int saqueTemporario = saldo - saque;
-  user usuario;
-
-  if (saqueTemporario < 0) {
-    cout << "você não pode sacar esse valor, pois é maior do que você tem na conta!" << endl;
-
-  } else {
-    saldo -= saque;
-    cout << "Parabéns! Você sacou R$" << saque << ". Deseja ver seu saldo? (s, n): ";
-    refazer(usuario);
+  
   }
 };
 
-void user::depositarValor(int deposito) {
+void user::depositarValor(double deposito) {
   saldo += deposito;
   char chose;
-  cout << "parabéns! Você depositou R$" << deposito << " em sua conta. Deseja ver seu saldo? (s, n): ";
+  cout << "parabéns! Você depositou R$" << fixed << setprecision(2) << deposito << " em sua conta. Deseja ver seu saldo? (s, n): ";
   cin >> chose;
   
   switch (chose) {
@@ -109,7 +107,6 @@ bool escolherOperacao(string operacao, user &usuario) {
    } else {
     cout << "Insira uma operação válida!" << endl;
     return false;
-
    } 
 };
 
@@ -128,4 +125,3 @@ int main() {
 
     loop = escolherOperacao(operacao, usuario);
   }
-}
