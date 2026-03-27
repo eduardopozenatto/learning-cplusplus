@@ -14,7 +14,7 @@ private:
   double _velocidadeAtual;
 
 public:
-  Carro (string marca, string modelo, string cor, double velocidadeAtual = 0, double tanqueCombustivel = 50, double combustivelTotal = 0) {
+  Carro (string marca, string modelo, string cor, double velocidadeAtual = 0, double tanqueCombustivel = 0, double combustivelTotal = 50) {
     _marca = marca;
     _modelo = modelo;
     _cor = cor;
@@ -33,10 +33,10 @@ public:
   };
 
   void acelerarCarro(double aceleracao) {
-    if (_tanqueCombustivel > (_combustivelTotal / 2)) {
+    if (_tanqueCombustivel > ((_combustivelTotal / 100) * 5)) {
       if((_velocidadeAtual + aceleracao) <= 110) {
         this->_velocidadeAtual += aceleracao;
-        this->_tanqueCombustivel -= _combustivelTotal / 2;
+        this->_tanqueCombustivel -= (_combustivelTotal / 100) * 2 + (aceleracao / 8);
 
       } else {
         cout << "vocẽ não pode mais acelerar, pois o limite permitido é 110km/h!";
@@ -62,7 +62,7 @@ public:
 
   void abastecerCarro(double combustivel) {
     if ((_tanqueCombustivel + combustivel) > _combustivelTotal) {
-      cout << "eu tanque tem é limitado a 50l de gasolina";
+      cout << "Seu tanque tem é limitado a " << _combustivelTotal << "l de gasolina";
     } else {
     _tanqueCombustivel += combustivel;
     }
