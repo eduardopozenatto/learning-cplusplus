@@ -14,7 +14,12 @@ private:
   double _velocidadeAtual;
 
 public:
-  Carro (string marca, string modelo, string cor, double velocidadeAtual = 0, double tanqueCombustivel = 0, double combustivelTotal = 50) {
+  Carro
+  (
+  string marca, string modelo, 
+  string cor, double velocidadeAtual = 0, 
+  double tanqueCombustivel = 0, double combustivelTotal = 50
+    ) {
     _marca = marca;
     _modelo = modelo;
     _cor = cor;
@@ -62,7 +67,7 @@ public:
 
   void abastecerCarro(double combustivel) {
     if ((_tanqueCombustivel + combustivel) > _combustivelTotal) {
-      cout << "Seu tanque tem é limitado a " << _combustivelTotal << "l de gasolina";
+      cout << "Seu tanque é limitado a " << _combustivelTotal << "l de gasolina";
     } else {
     _tanqueCombustivel += combustivel;
     }
