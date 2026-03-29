@@ -11,7 +11,7 @@ private:
     string _classe;
 
 public:
-    Personagem(string nome, int vida, int ataque, string classe) {
+    Personagem(string nome, string classe, int vida = 10, int ataque = 1) {
     _nome = nome;
     _vida = vida;
     _ataque = ataque;
